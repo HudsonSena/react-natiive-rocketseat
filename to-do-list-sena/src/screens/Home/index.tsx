@@ -8,6 +8,7 @@ import {
 import { style } from "./styles";
 import { Task } from "../../components/Task";
 import LogoSvg from "../../../assets/logo.svg";
+import Plus from "../../../assets/plus.svg";
 
 export function Home() {
   const tarefas = ["tarefa 1", "tarefa 2", "tarefa 3"];
@@ -23,7 +24,9 @@ export function Home() {
           placeholder="Adicione uma nova tarefa"
           placeholderTextColor={"grey"}
         />
-        <TouchableOpacity style={style.buttonText}></TouchableOpacity>
+        <TouchableOpacity style={style.buttonText}>
+          <Plus />
+        </TouchableOpacity>
       </View>
       <View>
         <View>
