@@ -19,18 +19,11 @@ const styles = StyleSheet.create({
 });
 
 export function Task({ description, onRemove }: Props) {
-  function toogle() {
-    "checked={true}";
-  }
+  function toogle() {}
   return (
     <View style={styles.card}>
       <View style={styles.checkBox}>
-        <CheckBox
-          borderWidth={2}
-          borderRadius={3}
-          checked={false}
-          onPress={toogle}
-        />
+        <CheckBox borderWidth={2} borderRadius={3} onPress={toogle} />
       </View>
 
       <Text>{description}</Text>
