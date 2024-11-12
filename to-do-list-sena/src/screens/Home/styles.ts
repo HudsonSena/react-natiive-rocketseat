@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#1A1A1A",
+    paddingBottom: 12,
   },
   header: {
     paddingTop: 30,
@@ -24,7 +25,7 @@ export const styles = StyleSheet.create({
     height: 54,
     flexDirection: "row",
     gap: 4,
-    marginTop: -30,
+    marginTop: -50,
     marginBottom: 32,
   },
   input: {
@@ -48,6 +49,48 @@ export const styles = StyleSheet.create({
   txtQnt: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 20,
+  },
+  txtQnt2: {
+    flexDirection: "row",
+    gap: 4,
+    color: "white",
+    alignItems: "center",
+  },
+  txtCreated: {
+    color: "#4EA8DE",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  txtComplete: {
+    color: "#8284FA",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  txtNumber: {
+    color: "white",
+    borderRadius: 50,
+    backgroundColor: "#262626",
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+  },
+  list: {
+    paddingHorizontal: 24,
+  },
+  emptyBox: {
+    padding: 40,
+    alignItems: "center",
+    borderTopWidth: 0.5,
+    borderColor: "gray",
+  },
+  txtEmpty: {
+    color: "#808080",
+    fontWeight: "bold",
+  },
+  txtEmpty2: {
+    color: "#808080",
+  },
+  imgEmpty: {
+    width: 56,
+    objectFit: "contain",
   },
 });
