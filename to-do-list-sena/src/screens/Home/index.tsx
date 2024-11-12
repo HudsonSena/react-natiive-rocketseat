@@ -11,29 +11,44 @@ import { styles } from "./styles";
 import { Task } from "../../components/Task";
 import { useState } from "react";
 
+type TaskType = {
+  title: string;
+  color: string;
+  checked: boolean;
+  disabled: boolean;
+};
+
 export function Home() {
-  const [tasks, setTasks] = useState<string[]>([]);
+  const [tasks, setTasks] = useState<TaskType[]>([]);
   const [description, setDescription] = useState("");
 
   function handleTaskAdd() {
-    if (tasks.includes(description)) {
-      return Alert.alert("Tarefa ja existe");
+    if (tasks.some((task) => task.title === description)) {
+      return Alert.alert("Tarefa já existe");
     }
-    if (description == "" || " ") {
+
+    if (!description.trim()) {
       return Alert.alert("Digite a tarefa");
     }
 
-    setTasks((prevState) => [...prevState, description]);
+    const newTask = {
+      title: description,
+      color: "#6b6b6b",
+      checked: false,
+      disabled: false,
+    };
+
+    setTasks((prevState) => [newTask, ...prevState]);
     setDescription("");
   }
 
-  function handleTaskRemove(description: string) {
+  function handleTaskRemove(taskTitle: string) {
     Alert.alert("Remover", "Remover essa tarefa?", [
       {
         text: "Sim",
         onPress: () =>
           setTasks((prevState) =>
-            prevState.filter((task) => task != description)
+            prevState.filter((task) => task.title !== taskTitle)
           ),
       },
       {
@@ -42,7 +57,15 @@ export function Home() {
       },
     ]);
   }
-  //Descrição com mais de uma linha de conteúdo para verificar o posicionamento no card
+
+  function handleToggleComplete(taskTitle: string) {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.title === taskTitle ? { ...task, checked: !task.checked } : task
+      )
+    );
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -74,16 +97,22 @@ export function Home() {
           </View>
           <View style={styles.txtQnt2}>
             <Text style={styles.txtComplete}>Concluídas</Text>
-            <Text style={styles.txtNumber}>10</Text>
+            <Text style={styles.txtNumber}>
+              {tasks.filter((task) => task.checked).length}
+            </Text>
           </View>
         </View>
       </View>
       <FlatList
         style={styles.list}
         data={tasks}
-        keyExtractor={(item) => item}
+        keyExtractor={(item) => item.title}
         renderItem={({ item }) => (
-          <Task description={item} onRemove={() => handleTaskRemove(item)} />
+          <Task
+            task={item}
+            onRemove={() => handleTaskRemove(item.title)}
+            onToggleComplete={handleToggleComplete}
+          />
         )}
         ListEmptyComponent={() => (
           <View style={styles.emptyBox}>
