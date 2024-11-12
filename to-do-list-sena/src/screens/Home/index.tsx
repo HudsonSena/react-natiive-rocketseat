@@ -19,6 +19,10 @@ export function Home() {
     if (tasks.includes(description)) {
       return Alert.alert("Tarefa ja existe");
     }
+    if (description == "" || " ") {
+      return Alert.alert("Digite a tarefa");
+    }
+
     setTasks((prevState) => [...prevState, description]);
     setDescription("");
   }
@@ -54,6 +58,7 @@ export function Home() {
             placeholder="Adicione uma nova tarefa"
             placeholderTextColor={"#808080"}
             onChangeText={setDescription}
+            value={description}
           />
           <TouchableOpacity style={styles.button} onPress={handleTaskAdd}>
             <Image
